@@ -19,3 +19,7 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+$router->group(['prefix' => '/api/v2', 'before' => 'oauth2',], function($router) {
+    $router->resource('posts', 'PostController');
+});
