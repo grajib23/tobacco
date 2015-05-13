@@ -15,4 +15,5 @@ Route::get('/', 'WelcomeController@index');
 
 $router->group(['prefix' => '/api/v1', 'before' => 'oauth2',], function($router) {
     $router->resource('posts', 'PostController');
+    $router->resource('news', 'NewsController');
 });
