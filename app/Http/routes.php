@@ -13,13 +13,6 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
-$router->group(['prefix' => '/api/v2', 'before' => 'oauth2',], function($router) {
+$router->group(['prefix' => '/api/v1', 'before' => 'oauth2',], function($router) {
     $router->resource('posts', 'PostController');
 });

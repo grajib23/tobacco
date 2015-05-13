@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use App\Decorators\Cache\PostCache;
 use App\Decorators\Validators\PostValidator;
 use App\Models\Post;
 use App\Repositories\Post\EloquentPostRepository;
@@ -29,11 +30,10 @@ class RepositoryServiceProvider extends ServiceProvider {
         $app = $this->app;
         $app->bind('App\Repositories\Post\PostRepository',function(){
             $post =  new EloquentPostRepository(new Post());
-            return $post;
-            //$cacheService = Cache::driver();
-            //$cache = new PostCache($cacheService,$post);
-            //$validator = App::make('validator');
-            //return new PostValidator($validator,$post);
+            $cacheService = Cache::driver();
+            $cache = new PostCache($cacheService,$post);
+            $validator = App::make('validator');
+            return new PostValidator($validator,$cache);
         });
 	}
 

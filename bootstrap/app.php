@@ -38,6 +38,7 @@ $app->singleton(
 
 $app->singleton(
 	'Illuminate\Contracts\Debug\ExceptionHandler',
+    'App\Exceptions\ValidationExceptionHandler',
 	'App\Exceptions\Handler'
 );
 

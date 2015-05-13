@@ -8,13 +8,22 @@
 
 namespace App\Decorators\Validators;
 
-
-use App\Repositories\BaseRepository;
 use App\Repositories\Post\PostRepository;
 use Illuminate\Contracts\Validation\Factory as Validation;
 
-class PostValidator extends BaseRepository implements PostRepository{
+class PostValidator extends BaseValidator implements PostRepository{
 
+    protected $rules = [
+        'common' => [
+            'title'         => 'required|max:100',
+            'status'        => 'required|integer',
+            'author_id'     => 'required|integer|exists:users,id',
+        ],
+        'create' => [],
+        'update' => [
+            'id'      => 'required|exists:posts,id',
+        ]
+    ];
 
     function __construct(Validation $validation, PostRepository $model)
     {

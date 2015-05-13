@@ -55,10 +55,9 @@ abstract class BaseValidator {
         return $this->model->create($attributes);
     }
 
-   public function update($id, array $attribute)
+    public function update($id, array $attribute)
     {
         $attribute['id'] = $id;
-        //$this->setUpdateRules($id);
         $rules = array_merge($this->rules['common'],$this->rules['update']);
         $validator = $this->validation->make($attribute, $rules);
         if($validator->fails()){
