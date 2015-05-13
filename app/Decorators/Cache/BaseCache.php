@@ -24,7 +24,7 @@ abstract class BaseCache {
      */
     protected $model;
 
-    protected $baseCacheKey = 'posts';
+    protected $baseCacheKey = '';
 
     /**
      * @param Cache $cache

@@ -3,15 +3,19 @@
 use App\Decorators\Cache\CommentCache;
 use App\Decorators\Cache\NewsCache;
 use App\Decorators\Cache\PostCache;
+use App\Decorators\Cache\UserCache;
 use App\Decorators\Validators\CommentValidator;
 use App\Decorators\Validators\NewsValidator;
 use App\Decorators\Validators\PostValidator;
+use App\Decorators\Validators\UserValidator;
 use App\Models\Comment;
 use App\Models\News;
 use App\Models\Post;
+use App\Models\User;
 use App\Repositories\Comment\EloquentCommentRepository;
 use App\Repositories\News\EloquentNewsRepository;
 use App\Repositories\Post\EloquentPostRepository;
+use App\Repositories\User\EloquentUserRepository;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +40,14 @@ class RepositoryServiceProvider extends ServiceProvider {
 	public function register()
 	{
         $app = $this->app;
+        $app->bind('App\Repositories\User\UserRepository',function(){
+            $user =  new EloquentUserRepository(new User());
+            $cacheService = Cache::driver();
+            $cache = new UserCache($cacheService,$user);
+            $validator = App::make('validator');
+            return new UserValidator($validator,$cache);
+        });
+
         $app->bind('App\Repositories\Post\PostRepository',function(){
             $post =  new EloquentPostRepository(new Post());
             $cacheService = Cache::driver();

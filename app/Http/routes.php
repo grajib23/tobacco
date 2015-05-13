@@ -14,7 +14,12 @@
 Route::get('/', 'WelcomeController@index');
 
 $router->group(['prefix' => '/api/v1', 'before' => 'oauth',], function($router) {
+    $router->resource('users',    'UserController');
     $router->resource('posts',    'PostController');
     $router->resource('news',     'NewsController');
     $router->resource('comments', 'CommentController');
+});
+
+Route::post('oauth/access_token', function() {
+    return Authorizer::issueAccessToken();
 });

@@ -201,7 +201,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		
-		'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'Sentry'     => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         'Authorizer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade',
 
 	],

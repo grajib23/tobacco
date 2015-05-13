@@ -2,9 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-
-// composer require laracasts/testdummy
-use Laracasts\TestDummy\Factory as TestDummy;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,10 +11,22 @@ class UserTableSeeder extends Seeder
         User::truncate();
         $faker = Faker\Factory::create();
         for($i = 0; $i<10; $i++) {
-            User::create([
-                'first_name' => $faker->name,
-                'email'      => $faker->unique()->email,
-            ]);
+            try
+            {
+                // Create the user
+                $user = Sentry::createUser(array(
+                    'first_name'         => $faker->name,
+                    'last_name'          => $faker->name,
+                    'email'              => $faker->unique()->email,
+                    'password'           => '123',
+                    'activated'          => true,
+                ));
+                // Find the group using the group id
+                $adminGroup = Sentry::findGroupById($faker->randomElement(array(1,2,3)));
+                // Assign the group to the user
+                $user->addGroup($adminGroup);
+            }
+            catch(\Exception $e){}
         }
     }
 }

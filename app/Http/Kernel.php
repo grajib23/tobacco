@@ -17,6 +17,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		//'App\Http\Middleware\VerifyCsrfToken',
         'LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware',
+        'App\Http\Middleware\CORSMiddleware',
 	];
 
 	/**
