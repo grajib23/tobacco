@@ -150,6 +150,8 @@ return [
 		* Third Party Package Service Providers...
 		*/
 		'Cartalyst\Sentry\SentryServiceProvider',
+        'LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider',
+        'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
 
 	],
 
@@ -200,6 +202,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		
 		'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Authorizer' => 'LucaDegasperi\OAuth2Server\Facades\AuthorizerFacade',
 
 	],
 
