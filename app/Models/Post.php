@@ -22,4 +22,8 @@ class Post extends Model {
     public function author(){
         return $this->belongsTo('App\Models\User','author_id','id');
     }
+
+    public function comments(){
+        return $this->belongsTo('App\Models\Comment','post_id','id');
+    }
 }

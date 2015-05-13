@@ -1,11 +1,15 @@
 <?php namespace App\Providers;
 
+use App\Decorators\Cache\CommentCache;
 use App\Decorators\Cache\NewsCache;
 use App\Decorators\Cache\PostCache;
+use App\Decorators\Validators\CommentValidator;
 use App\Decorators\Validators\NewsValidator;
 use App\Decorators\Validators\PostValidator;
+use App\Models\Comment;
 use App\Models\News;
 use App\Models\Post;
+use App\Repositories\Comment\EloquentCommentRepository;
 use App\Repositories\News\EloquentNewsRepository;
 use App\Repositories\Post\EloquentPostRepository;
 use Illuminate\Support\Facades\App;
@@ -46,6 +50,14 @@ class RepositoryServiceProvider extends ServiceProvider {
             $cache = new NewsCache($cacheService,$news);
             $validator = App::make('validator');
             return new NewsValidator($validator,$cache);
+        });
+
+        $app->bind('App\Repositories\Comment\CommentRepository',function(){
+            $comment =  new EloquentCommentRepository(new Comment());
+            $cacheService = Cache::driver();
+            $cache = new CommentCache($cacheService,$comment);
+            $validator = App::make('validator');
+            return new CommentValidator($validator,$cache);
         });
 	}
 
