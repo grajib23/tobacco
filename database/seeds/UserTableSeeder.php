@@ -18,6 +18,8 @@ class UserTableSeeder extends Seeder
                     'first_name'         => $faker->name,
                     'last_name'          => $faker->name,
                     'email'              => $faker->unique()->email,
+                    'phone'              => $faker->unique()->phoneNumber,
+                    'image_url'          => $faker->imageUrl($width = 640, $height = 480),
                     'password'           => '123',
                     'activated'          => true,
                 ));

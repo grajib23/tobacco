@@ -18,6 +18,7 @@ class UserValidator extends BaseValidator implements UserRepository{
     protected $rules = [
         'common' => [
             'email'           => 'required|max:100|unique:users',
+            'phone'           => 'required|max:100|unique:users',
             'group_id'        => 'required|integer|exists:groups,id',
         ],
         'create' => [
