@@ -3,18 +3,22 @@
 use App\Decorators\Cache\CommentCache;
 use App\Decorators\Cache\NewsCache;
 use App\Decorators\Cache\PostCache;
+use App\Decorators\Cache\QuestionTypeCache;
 use App\Decorators\Cache\UserCache;
 use App\Decorators\Validators\CommentValidator;
 use App\Decorators\Validators\NewsValidator;
 use App\Decorators\Validators\PostValidator;
+use App\Decorators\Validators\QuestionTypeValidator;
 use App\Decorators\Validators\UserValidator;
 use App\Models\Comment;
 use App\Models\News;
 use App\Models\Post;
+use App\Models\QuestionType;
 use App\Models\User;
 use App\Repositories\Comment\EloquentCommentRepository;
 use App\Repositories\News\EloquentNewsRepository;
 use App\Repositories\Post\EloquentPostRepository;
+use App\Repositories\QuestionType\EloquentQuestionTypeRepository;
 use App\Repositories\User\EloquentUserRepository;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -70,6 +74,14 @@ class RepositoryServiceProvider extends ServiceProvider {
             $cache = new CommentCache($cacheService,$comment);
             $validator = App::make('validator');
             return new CommentValidator($validator,$cache);
+        });
+
+        $app->bind('App\Repositories\QuestionType\QuestionTypeRepository',function(){
+            $questionType =  new EloquentQuestionTypeRepository(new QuestionType());
+            $cacheService = Cache::driver();
+            $cache = new QuestionTypeCache($cacheService,$questionType);
+            $validator = App::make('validator');
+            return new QuestionTypeValidator($validator,$cache);
         });
 	}
 

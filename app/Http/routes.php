@@ -13,11 +13,12 @@
 
 Route::get('/', 'WelcomeController@index');
 
-$router->group(['prefix' => '/api/v1', 'before' => 'oauth',], function($router) {
+$router->group(['prefix' => '/api/v1', 'before' => 'oauth2',], function($router) {
     $router->resource('users',    'UserController');
     $router->resource('posts',    'PostController');
     $router->resource('news',     'NewsController');
     $router->resource('comments', 'CommentController');
+    $router->resource('question-type', 'QuestionTypeController');
 });
 
 Route::post('oauth/access_token', function() {
