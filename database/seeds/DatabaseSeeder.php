@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PostTableSeeder');
 		$this->call('NewsTableSeeder');
 		$this->call('CommentTableSeeder');
+		$this->call('QuestionTypeTableSeeder');
+		$this->call('QuestionTableSeeder');
+		$this->call('QuestionAnswerTableSeeder');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 

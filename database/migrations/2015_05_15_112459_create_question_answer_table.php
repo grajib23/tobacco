@@ -18,7 +18,7 @@ class CreateQuestionAnswerTable extends Migration {
 			$table->text('answer');
 			$table->tinyInteger('status');
 			$table->integer('question_id')->unsigned();
-			$table->integer('user_id')->unsigned();
+			$table->integer('author_id')->unsigned();
 			$table->timestamps();
             $table->softDeletes();
 
@@ -27,7 +27,7 @@ class CreateQuestionAnswerTable extends Migration {
                             ->on('questions')
                                 ->onDelete('cascade');
 
-            $table->foreign('user_id')
+            $table->foreign('author_id')
                         ->references('id')
                             ->on('users')
                                 ->onDelete('cascade');
