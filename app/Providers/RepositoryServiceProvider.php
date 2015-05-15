@@ -3,12 +3,14 @@
 use App\Decorators\Cache\CommentCache;
 use App\Decorators\Cache\NewsCache;
 use App\Decorators\Cache\PostCache;
+use App\Decorators\Cache\QuestionAnswerCache;
 use App\Decorators\Cache\QuestionCache;
 use App\Decorators\Cache\QuestionTypeCache;
 use App\Decorators\Cache\UserCache;
 use App\Decorators\Validators\CommentValidator;
 use App\Decorators\Validators\NewsValidator;
 use App\Decorators\Validators\PostValidator;
+use App\Decorators\Validators\QuestionAnswerValidator;
 use App\Decorators\Validators\QuestionTypeValidator;
 use App\Decorators\Validators\QuestionValidator;
 use App\Decorators\Validators\UserValidator;
@@ -16,12 +18,14 @@ use App\Models\Comment;
 use App\Models\News;
 use App\Models\Post;
 use App\Models\Question;
+use App\Models\QuestionAnswer;
 use App\Models\QuestionType;
 use App\Models\User;
 use App\Repositories\Comment\EloquentCommentRepository;
 use App\Repositories\News\EloquentNewsRepository;
 use App\Repositories\Post\EloquentPostRepository;
 use App\Repositories\Question\EloquentQuestionRepository;
+use App\Repositories\QuestionAnswer\EloquentQuestionAnswerRepository;
 use App\Repositories\QuestionType\EloquentQuestionTypeRepository;
 use App\Repositories\User\EloquentUserRepository;
 use Illuminate\Support\Facades\App;
@@ -94,6 +98,14 @@ class RepositoryServiceProvider extends ServiceProvider {
             $cache = new QuestionCache($cacheService,$question);
             $validator = App::make('validator');
             return new QuestionValidator($validator,$cache);
+        });
+
+        $app->bind('App\Repositories\QuestionAnswer\QuestionAnswerRepository',function(){
+            $questionAnswer =  new EloquentQuestionAnswerRepository(new Question(), new QuestionAnswer());
+            $cacheService = Cache::driver();
+            $cache = new QuestionAnswerCache($cacheService,$questionAnswer);
+            $validator = App::make('validator');
+            return new QuestionAnswerValidator($validator,$cache);
         });
 	}
 

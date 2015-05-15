@@ -23,7 +23,7 @@ class QuestionValidator extends  BaseValidator implements QuestionRepository{
         ],
         'create' => [],
         'update' => [
-            'id'      => 'required|exists:question_type,id',
+            'id'      => 'required|exists:questions,id',
         ]
     ];
 
