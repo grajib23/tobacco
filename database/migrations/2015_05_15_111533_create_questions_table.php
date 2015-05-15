@@ -20,6 +20,7 @@ class CreateQuestionsTable extends Migration {
 			$table->tinyInteger('status');
 			$table->integer('author_id')->unsigned();
 			$table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('author_id')
                     ->references('id')

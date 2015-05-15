@@ -18,6 +18,7 @@ class CreateQuestionTypeTable extends Migration {
 			$table->string('type',255);
 			$table->tinyInteger('status');
 			$table->timestamps();
+            $table->softDeletes();
 		});
 	}
 

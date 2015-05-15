@@ -20,6 +20,7 @@ class CreateQuestionAnswerTable extends Migration {
 			$table->integer('question_id')->unsigned();
 			$table->integer('user_id')->unsigned();
 			$table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('question_id')
                         ->references('id')
