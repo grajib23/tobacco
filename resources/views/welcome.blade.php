@@ -40,6 +40,7 @@
 	<body>
 		<div class="container">
 			<div class="content">
+			    <h1>{{$name}}</h1>
 				<div class="title">Laravel 5</div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 			</div>

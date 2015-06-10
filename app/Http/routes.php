@@ -26,3 +26,4 @@ $router->group(['prefix' => '/api/v1', 'before' => 'oauth2',], function($router)
 Route::post('oauth/access_token', function() {
     return Authorizer::issueAccessToken();
 });
+
